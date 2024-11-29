@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 def func_1(x):
     return -(x**2)/4 + 2*x
 
