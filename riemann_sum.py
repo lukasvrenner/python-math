@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
-def func_1(x):
-    return -(x**2)/4 + 2*x
+def summand(x):
+    return x ** (1/2)
 
-def riemen_sum(func, lower, upper, n: int, shift):
+def riemann_sum(func, lower, upper, n: int, shift):
     delta_x = (upper - lower) / n
     sum = 0
     for i in range(n):
@@ -11,6 +11,6 @@ def riemen_sum(func, lower, upper, n: int, shift):
     sum *= delta_x
     return sum
 
-print("left:",riemen_sum(func_1, lower=3, upper=7, n=8, shift=0))
-print("middle:", riemen_sum(func_1, lower=3, upper=7, n=8, shift=0.5))
-print("right:", riemen_sum(func_1, lower=3, upper=7, n=8, shift=1))
+print("left:",riemann_sum(summand, lower=0, upper=10000, n=10000, shift=0))
+print("middle:", riemann_sum(summand, lower=0, upper=10000, n=10000, shift=0.5))
+print("right:", riemann_sum(summand, lower=0, upper=10000, n=10000, shift=1))
