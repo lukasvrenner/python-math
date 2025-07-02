@@ -3,7 +3,8 @@
 import math
 
 def integrand(x):
-    return math.sqrt(x ** 2 + 7)
+    return math.sqrt((-math.sin(x)) ** 2 + (math.cos(x)*math.exp(math.sin(x))) ** 2)
+
 
 def riemann_sum(func, lower, upper, n: int, shift):
     delta_x = (upper - lower) / n
@@ -24,8 +25,8 @@ def trapezoid(func, lower, upper, n: int):
     sum = func(lower) + sum + func(upper)
     return sum * delta_x / 2
 
-def simpsons(func, lower, upper, n: int):
-    assert(n & 1 == 0)
+def simpsons(func, lower, upper, n: int) -> float:
+    assert n & 1 == 0, "n must be even"
     delta_x = (upper - lower) / n
 
     mul_four_sum = 0
@@ -41,8 +42,8 @@ def simpsons(func, lower, upper, n: int):
     sum = func(lower) + mul_four_sum + mul_two_sum + func(upper)
     return sum * delta_x / 3
 
-print("left:", riemann_sum(integrand, lower=0, upper=2, n=6, shift=0))
-print("middle:", riemann_sum(integrand, lower=0, upper=2, n=6, shift=0.5))
-print("right:", riemann_sum(integrand, lower=0, upper=2, n=6, shift=1))
-print("trapezoid:", trapezoid(integrand, lower=0, upper=2, n=6))
-print("simpsons:", simpsons(integrand, lower=0, upper=2, n=6))
+print("left:", riemann_sum(integrand, lower=1, upper=4, n=5, shift=0))
+print("middle:", riemann_sum(integrand, lower=0, upper=4 * math.pi, n=10, shift=0.5))
+print("right:", riemann_sum(integrand, lower=1, upper=4, n=5, shift=1))
+print("trapezoid:", trapezoid(integrand, lower=0, upper=math.pi, n=6))
+print("simpsons:", math.pi * 2 * simpsons(integrand, lower=0, upper=math.pi, n=6))
